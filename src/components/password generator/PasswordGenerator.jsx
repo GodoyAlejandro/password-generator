@@ -3,17 +3,20 @@ import React, { useEffect, useState } from "react";
 
 const PasswordGenerator = (props) => {
   const { passwordLength, setPasswordLength, randomWords } = props;
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
 
-  const handleClick=()=>{
-    // const aleatorio = randomWords[Math.floor(Math.random()* randomWords.length)]
-    // setPassword(aleatorio)
-    console.log(randomWords);
-  }
+  const createRandom = () => {
+    return randomWords[Math.floor(Math.random() * randomWords.length)];
+  };
 
-  useEffect(()=>{
-     console.log(randomWords);
-  },[])
+  const handleClick = () => {
+    const aleatorio = createRandom() + createRandom();
+    setPassword(aleatorio);
+    console.log(aleatorio);
+    console.log(passwordLength);
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <Paper>
@@ -21,10 +24,16 @@ const PasswordGenerator = (props) => {
         type="number"
         name="password length"
         value={passwordLength}
-        onChange={(e) => setPasswordLength(e.target.value)}
+        onChange={(e) => setPasswordLength(parseInt(e.target.value))}
       />
-      <Button onClick={()=>{handleClick()}} >submit</Button>
-      <Typography variant='h1'>{password}</Typography>
+      <Button
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        submit
+      </Button>
+      <Typography variant="h1">{password}</Typography>
     </Paper>
   );
 };

@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import PasswordGenerator from "./PasswordGenerator";
 
 const PasswordGeneratorContainer = () => {
-  const [passwordLength, setPasswordLength] = useState("");
+  const [passwordLength, setPasswordLength] = useState();
   const [randomWords, setRandomWords] = useState([]);
-  
 
+  const options = {
+    header: {
+      "content-type": "aplication/json",
+    },
+  };
   useEffect(() => {
-    fetch("http://palabras-aleatorias-public-api.herokuapp.com/multiple-random")
-      .then((response) => response.json())
-      .then((data) => {
-        setRandomWords(data.body.map((e)=>{return e.Word}))
-        // data.body.map((e)=>{return(
-        //   setRandomWords(e)
-        // )})
-      })
+    fetch(
+      "https://clientes.api.greenborn.com.ar/public-random-word?c=99",
+      options
+    )
+      .then((res) => res.json())
+      .then((data) => setRandomWords(data));
   }, []);
   return (
     <>
