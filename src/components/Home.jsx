@@ -3,7 +3,7 @@ import PasswordGeneratorContainer from './password generator/PasswordGeneratorCo
 
 const Home = () => {
   return (
-    <div >
+    <div>
         <PasswordGeneratorContainer/>
     </div>
   )
