@@ -7,12 +7,11 @@ const options = {
   },
 };
 const PasswordGeneratorContainer = () => {
-  const [passwordLength, setPasswordLength] = useState();
   const [randomWords, setRandomWords] = useState([]);
 
   useEffect(() => {
     fetch(
-      "https://clientes.api.greenborn.com.ar/public-random-word?c=99",
+      "https://clientes.api.greenborn.com.ar/public-random-word?c=10",
       options
     )
       .then((res) => res.json())
@@ -20,11 +19,7 @@ const PasswordGeneratorContainer = () => {
   }, []);
   return (
     <>
-      <PasswordGenerator
-        setPasswordLength={setPasswordLength}
-        passwordLength={passwordLength}
-        randomWords={randomWords}
-      />
+      <PasswordGenerator randomWords={randomWords} />
     </>
   );
 };
