@@ -14,12 +14,12 @@ import { Container } from "@mui/system";
 import React, { useEffect, useState } from "react";
 
 const PasswordGenerator = (props) => {
-  const { randomWords } = props;
+  const { randomWords, setRandomWords } = props;
   const [config, setConfig] = useState({
     passwordLength: 8,
+    numbers: true,
     words: true,
     upperCaseWords: true,
-    numbers: true,
   });
   const [password, setPassword] = useState();
 
@@ -53,71 +53,86 @@ const PasswordGenerator = (props) => {
   };
 
   const submit = () => {
+    // const caracteres = {
+    //   numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    //   words: [
+    //     "a",
+    //     "b",
+    //     "c",
+    //     "d",
+    //     "e",
+    //     "f",
+    //     "g",
+    //     "h",
+    //     "i",
+    //     "j",
+    //     "k",
+    //     "l",
+    //     "m",
+    //     "n",
+    //     "o",
+    //     "p",
+    //     "q",
+    //     "r",
+    //     "s",
+    //     "u",
+    //     "v",
+    //     "w",
+    //     "x",
+    //     "y",
+    //     "z",
+    //   ],
+    //   upperCaseWords: [
+    //     "A",
+    //     "B",
+    //     "C",
+    //     "D",
+    //     "E",
+    //     "F",
+    //     "G",
+    //     "H",
+    //     "I",
+    //     "J",
+    //     "K",
+    //     "L",
+    //     "M",
+    //     "N",
+    //     "O",
+    //     "P",
+    //     "Q",
+    //     "R",
+    //     "S",
+    //     "U",
+    //     "V",
+    //     "W",
+    //     "X",
+    //     "Y",
+    //     "Z",
+    //   ],
+    // };
+
     const caracteres = {
-      numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-      words: [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-      ],
-      upperCaseWords: [
-        "A",
-        "B",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G",
-        "H",
-        "I",
-        "J",
-        "K",
-        "L",
-        "M",
-        "N",
-        "O",
-        "P",
-        "Q",
-        "R",
-        "S",
-        "U",
-        "V",
-        "W",
-        "X",
-        "Y",
-        "Z",
-      ],
+      numbers: "0 1 2 3 4 5 6 7 8 9",
+      words: "a b c d e f g h i j k l m n ñ o p q r s t u v w y z",
+      upperCaseWords: "A B C D E F G H I J K L M N Ñ O P Q R S T U V W Y Z",
     };
-    const caracteresFinales = [];
+    let caracteresFinales = "";
+    let passWord = "";
     for (let prop in config) {
       if (config[prop] === true) {
-        caracteresFinales.concat(caracteres[prop]);
+        caracteresFinales += caracteres[prop] + " ";
       }
     }
-    caracteresFinales.concat(randomWords);
-    console.log(caracteresFinales);
+    caracteresFinales = caracteresFinales.trim();
+    caracteresFinales = caracteresFinales.split(" ");
+    // caracteresFinales = caracteresFinales.concat(randomWords);
+
+    for (let i = 0; i < config.passwordLength; i++) {
+      passWord +=
+        caracteresFinales[Math.floor(Math.random() * caracteresFinales.length)];
+    }
+    passWord += randomWords[Math.floor(Math.random() * randomWords.length)];
+    console.log(passWord);
   };
 
   return (

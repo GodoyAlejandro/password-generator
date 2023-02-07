@@ -19,7 +19,7 @@ const PasswordGeneratorContainer = () => {
   }, []);
   return (
     <>
-      <PasswordGenerator randomWords={randomWords} />
+      <PasswordGenerator randomWords={randomWords} setRandomWords={setRandomWords} />
     </>
   );
 };
