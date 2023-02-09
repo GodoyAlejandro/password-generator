@@ -52,6 +52,8 @@ const PasswordGenerator = (props) => {
     });
   };
 
+  
+
   const submit = () => {
     // const caracteres = {
     //   numbers: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
@@ -112,7 +114,7 @@ const PasswordGenerator = (props) => {
     // };
 
     const caracteres = {
-      numbers: "0 1 2 3 4 5 6 7 8 9",
+      numbers: "0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9",
       words: "a b c d e f g h i j k l m n ñ o p q r s t u v w y z",
       upperCaseWords: "A B C D E F G H I J K L M N Ñ O P Q R S T U V W Y Z",
     };
@@ -125,13 +127,16 @@ const PasswordGenerator = (props) => {
     }
     caracteresFinales = caracteresFinales.trim();
     caracteresFinales = caracteresFinales.split(" ");
-    // caracteresFinales = caracteresFinales.concat(randomWords);
+    caracteresFinales = caracteresFinales.concat(randomWords);
+
 
     for (let i = 0; i < config.passwordLength; i++) {
       passWord +=
         caracteresFinales[Math.floor(Math.random() * caracteresFinales.length)];
     }
-    passWord += randomWords[Math.floor(Math.random() * randomWords.length)];
+    
+    // passWord += randomWords[Math.floor(Math.random() * randomWords.length)];
+    console.log(caracteresFinales);
     console.log(passWord);
   };
 
@@ -154,6 +159,7 @@ const PasswordGenerator = (props) => {
             <Slider
               marks
               value={config.passwordLength}
+              min={8}
               max={15}
               valueLabelDisplay={"auto"}
               sx={{ width: "40rem" }}
